@@ -16,7 +16,7 @@ public struct AppLog {
         self.filename = filename
     }
     
-    // MARK: - Public functions
+    // MARK: - Reporting
     
     /// Makes a new log in the specified file.
     /// - Parameters:
@@ -149,15 +149,18 @@ public struct AppLog {
         
         func parse(_ contents: String, file: String, function: String, line: UInt) -> String {
             let formatter = DateFormatter()
+            formatter.dateStyle = .short
+            formatter.timeStyle = .short
             let dateString = formatter.string(from: Date())
+            let shortFile = file.components(separatedBy: "/").last ?? "error"
             
             switch self {
             case .critical:
-                return "\n\n--- CRITICAL ---\n\n\(contents)\n\nDATE: \(dateString)\n\nSENDER-FILE: \(file)\nSENDER-FUNCTION: \(function)\nSENDER-LINE: \(line)\n\nIMMEDIATE ACTION REQUIRED\n\n--- END CRITICAL ---\n"
+                return "\n\n--- CRITICAL ---\n\n\(contents)\n\nDATE: \(dateString)\n\nSENDER-FILE: \(shortFile)\nSENDER-FUNCTION: \(function)\nSENDER-LINE: \(line)\n\nIMMEDIATE ACTION REQUIRED\n\n--- END CRITICAL ---\n"
             case .error:
-                return "ERROR:\n\t\(contents)\n\tDATE: \(dateString)\n\tSENDER: \(file), \(function), \(line)"
+                return "ERROR:\n\t\(contents)\n\tDATE: \(dateString)\n\tSENDER: \(shortFile), \(function), \(line)"
             case .normal, .debug:
-                return "\(dateString), \(file), \(function), \(line) --- \(contents)"
+                return "\(dateString), \(shortFile), \(function), \(line) --- \(contents)"
             }
         }
     }
