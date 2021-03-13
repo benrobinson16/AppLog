@@ -91,6 +91,11 @@ public struct AppLog {
     }
     
     private func appendToFile(contents: String) {
+        
+        #if DEBUG
+        print(contents)
+        #endif
+        
         let url = fileurl
         do {
             if FileManager.default.fileExists(atPath: url.path) {
