@@ -83,7 +83,7 @@ public struct AppLog {
         appendToFile(contents: severity.parse(total, file: file, function: function, line: line))
     }
     
-    // MARK: - Private
+    // MARK: - File handling
     
     private var fileurl: URL {
         let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
@@ -91,7 +91,6 @@ public struct AppLog {
     }
     
     private func appendToFile(contents: String) {
-        
         #if DEBUG
         print(contents)
         #endif
@@ -117,6 +116,25 @@ public struct AppLog {
         } catch {
             // Error
         }
+    }
+    
+    @available(OSX 10.15.4, *)
+    public func readFile() -> Result<String, AppLogError> {
+        let url = fileurl
+        
+        do {
+            if FileManager.default.fileExists(atPath: url.path) {
+                let fileHandle = try FileHandle(forReadingFrom: url)
+                if let data = try fileHandle.readToEnd(),
+                   let str = String(data: data, encoding: .utf8) {
+                    return .success(str)
+                }
+            }
+        } catch {
+            // Error
+        }
+        
+        return .failure(AppLogError.reading)
     }
     
     // MARK: - Severity
@@ -182,5 +200,14 @@ public struct AppLog {
                 return "\(dateString), \(shortFile), \(function), \(line)\n\(contents)"
             }
         }
+    }
+    
+    // MARK: - Errors
+    
+    enum AppLogError: Error {
+        case reading
+        case writing
+        case existence
+        case unexpected
     }
 }
