@@ -6,7 +6,7 @@ final class AppLogTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(AppLog().text, "Hello, World!")
+//        XCTAssertEqual(AppLog().text, "Hello, World!")
     }
 
     static var allTests = [

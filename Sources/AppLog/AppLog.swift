@@ -119,6 +119,9 @@ public struct AppLog {
     }
     
     @available(OSX 10.15.4, *)
+    @available(tvOS 13.4, *)
+    @available(iOS 13.4, *)
+    @available(watchOS 6.4, *)
     public func readFile() -> Result<String, AppLogError> {
         let url = fileurl
         
@@ -204,7 +207,7 @@ public struct AppLog {
     
     // MARK: - Errors
     
-    enum AppLogError: Error {
+    public enum AppLogError: Error {
         case reading
         case writing
         case existence
