@@ -40,6 +40,8 @@ log.report(myError, myError2)
 
 Using any of the `String` overloads, defaults to the `.normal` severity. `Error` overloads default to the `.error` severity.
 
+> Note that when logs are made, they are also printed to the console (i.e. no need for an extra `print` statement as well). However, in debug builds, AppLog will not print to the console.
+
 ## Severity/formatting
 
 You can optionally provide a severity level to apply to your log.
