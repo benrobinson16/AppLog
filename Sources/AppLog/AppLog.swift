@@ -144,9 +144,9 @@ public struct AppLog {
         /// Provides data in the following format:
         /// ```
         /// ERROR:
-        ///     <contents>
-        ///     DATE: <date>
-        ///     SENDER: <sender-file>, <sender-function>, <sender-line>
+        /// <contents>
+        /// DATE: <date>
+        /// SENDER: <sender-file>, <sender-function>, <sender-line>
         /// ```
         case error
         
@@ -172,9 +172,9 @@ public struct AppLog {
             case .critical:
                 return "\n\n--- CRITICAL ---\n\n\(contents)\n\nDATE: \(dateString)\n\nSENDER-FILE: \(shortFile)\nSENDER-FUNCTION: \(function)\nSENDER-LINE: \(line)\n\nIMMEDIATE ACTION REQUIRED\n\n--- END CRITICAL ---\n"
             case .error:
-                return "ERROR:\n\t\(contents)\n\tDATE: \(dateString)\n\tSENDER: \(shortFile), \(function), \(line)"
+                return "ERROR:\n\(contents)\nDATE: \(dateString)\nSENDER: \(shortFile), \(function), \(line)"
             case .normal, .debug:
-                return "\(dateString), \(shortFile), \(function), \(line) --- \(contents)"
+                return "\(dateString), \(shortFile), \(function), \(line)\n\(contents)"
             }
         }
     }
