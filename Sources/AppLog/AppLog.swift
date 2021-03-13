@@ -25,7 +25,7 @@ public struct AppLog {
     ///   - file: The file that is sending this log. No need to override.
     ///   - function: The function that is sending this log. No need to override.
     ///   - line: The line that is sending this log. No need to override.
-    public func log(_ contents: String, severity: Severity = .normal, file: String = #file, function: String = #function, line: UInt = #line) {
+    public func report(_ contents: String, severity: Severity = .normal, file: String = #file, function: String = #function, line: UInt = #line) {
         #if !DEBUG
         guard severity != .debug else { return }
         #endif
@@ -39,7 +39,7 @@ public struct AppLog {
     ///   - file: The file that is sending this log. No need to override.
     ///   - function: The function that is sending this log. No need to override.
     ///   - line: The line that is sending this log. No need to override.
-    public func log(_ contents: String..., severity: Severity = .normal, file: String = #file, function: String = #function, line: UInt = #line) {
+    public func report(_ contents: String..., severity: Severity = .normal, file: String = #file, function: String = #function, line: UInt = #line) {
         #if !DEBUG
         guard severity != .debug else { return }
         #endif
@@ -54,7 +54,7 @@ public struct AppLog {
     ///   - file: The file that is sending this log. No need to override.
     ///   - function: The function that is sending this log. No need to override.
     ///   - line: The line that is sending this log. No need to override.
-    public func log(_ contents: Error, severity: Severity = .normal, file: String = #file, function: String = #function, line: UInt = #line) {
+    public func report(_ contents: Error, severity: Severity = .normal, file: String = #file, function: String = #function, line: UInt = #line) {
         #if !DEBUG
         guard severity != .debug else { return }
         #endif
@@ -69,7 +69,7 @@ public struct AppLog {
     ///   - file: The file that is sending this log. No need to override.
     ///   - function: The function that is sending this log. No need to override.
     ///   - line: The line that is sending this log. No need to override.
-    public func log(_ contents: Error..., severity: Severity = .normal, file: String = #file, function: String = #function, line: UInt = #line) {
+    public func report(_ contents: Error..., severity: Severity = .normal, file: String = #file, function: String = #function, line: UInt = #line) {
         #if !DEBUG
         guard severity != .debug else { return }
         #endif
