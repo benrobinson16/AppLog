@@ -16,6 +16,12 @@ public struct AppLog {
         self.filename = filename
     }
     
+    // MARK: - File Handling
+    
+    public func clearFile() {
+        writeToFile(contents: "")
+    }
+    
     // MARK: - Reporting
     
     /// Makes a new log in the specified file.
@@ -90,11 +96,19 @@ public struct AppLog {
             if FileManager.default.fileExists(atPath: url.path) {
                 let fileHandle = try FileHandle(forWritingTo: url)
                 fileHandle.seekToEndOfFile()
-                fileHandle.write(("\n" + contents).data(using: .utf8) ?? ("ERROR CONVERTING TO DATA".data(using: .utf8)!))
+                fileHandle.write(("\n" + contents + "\n").data(using: .utf8) ?? ("ERROR CONVERTING TO DATA".data(using: .utf8)!))
                 fileHandle.closeFile()
             } else {
                 try contents.write(to: url, atomically: true, encoding: .utf8)
             }
+        } catch {
+            // Error
+        }
+    }
+    
+    private func writeToFile(contents: String) {
+        do {
+            try contents.write(to: fileurl, atomically: true, encoding: .utf8)
         } catch {
             // Error
         }
