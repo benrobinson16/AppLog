@@ -2,6 +2,16 @@
 
 AppLog is a super simple logging package for Swift.
 
+## Installation
+
+AppLog is distributed as a Swift Package. To install:
+
+- For other Swift Packages: add the following to your `Package.swift` file:
+  ```swift
+  .package(name: "AppLog", url: "https://github.com/benrobinson16/AppLog.git", .upToNextMajor(from: .init(1, 0, 0)))
+  ```
+- For Xcode projects: use the GUI to add `https://github.com/benrobinson16/AppLog.git` to your dependencies. It is recommended to choose "up to next major" as the version requirement.
+
 ## Making the instance
 
 First, make an instance of `AppLog` in your app. There can be multiple instances if necessary.
